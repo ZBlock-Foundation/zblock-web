@@ -4,26 +4,34 @@ import { Link } from "react-router-dom";
 const Header = () => {
   return (
     <React.Fragment>
-      <header>
+      <header className="landing-header">
         <nav>
           <div className="row">
             <img src="resources/img/logo-white.png" alt="Omnifood logo" className="logo-white" />
             <img src="resources/img/logo.png" alt="Omnifood logo" className="logo-black" />
             <ul className="main-nav">
               <li>
-                <a href="#features">Food delivery</a>
+                <a href="#features" className="landing-link landing-link-active">
+                  Food delivery
+                </a>
               </li>
               <li>
-                <a href="#steps">How it Works</a>
+                <a href="#steps" className="landing-link landing-link-active">
+                  How it Works
+                </a>
               </li>
               <li>
-                <a href="#cities">Our cities</a>
+                <a href="#cities" className="landing-link landing-link-active">
+                  Our cities
+                </a>
               </li>
               <li>
-                <a href="#plans">Sign up</a>
+                <a href="#plans" className="landing-link landing-link-active">
+                  Sign up
+                </a>
               </li>
               <li>
-                <a className="btn btn-full js--scroll-to-start" style={{ fontWeight: 700 }} href="#">
+                <a className="btn btn-full js--scroll-to-start landing-link landing-link-active" style={{ fontWeight: 700 }} href="#">
                   Connect Metamask
                 </a>
               </li>
@@ -42,12 +50,12 @@ const Header = () => {
           <Link to="/app" className="btn btn-full">
             Go To App{" "}
           </Link>
-          <a className="btn btn-ghost js--scroll-to-start" href="#">
+          <a className="btn btn-ghost js--scroll-to-start landing-link landing-link-active" href="#">
             Show me more
           </a>
         </div>
       </header>
-      <section className=" section-features js--section-features" id="features">
+      <section className="section section-features js--section-features" id="features">
         <div className="row">
           <h2>Get food fast &mdash; not fast food</h2>
           <p className="long-copy">Hello, we’re Omnifood, your new premium food delivery service. We know you’re always busy. No time for cooking. So let us take care of that, we’re really good at it, we promise!</p>
@@ -80,7 +88,7 @@ const Header = () => {
         </div>
       </section>
 
-      <section className=" section-meals">
+      <section className="section section-meals">
         <ul className="meals-showcase clearfix">
           <li>
             <figure className="meal-photo">
@@ -128,7 +136,7 @@ const Header = () => {
         </ul>
       </section>
 
-      <section className=" section-steps" id="steps">
+      <section className="section section-steps" id="steps">
         <div className="row">
           <h2>How it works &mdash; Simple as 1, 2, 3</h2>
         </div>
@@ -150,17 +158,17 @@ const Header = () => {
               <p>Enjoy your meal after less than 20 minutes. See you the next time!</p>
             </div>
 
-            <a href="#" className="btn-app">
+            <a href="#" className="btn-app landing-link landing-link-active">
               <img src="resources/img/download-app.svg" alt="App Store Button" />
             </a>
-            <a href="#" className="btn-app">
+            <a href="#" className="btn-app landing-link landing-link-active">
               <img src="resources/img/download-app-android.png" alt="Play Store Button" />
             </a>
           </div>
         </div>
       </section>
 
-      <section className=" section-cities" id="cities">
+      <section className="section section-cities" id="cities">
         <div className="row">
           <h2>We're currently in these cities</h2>
         </div>
@@ -179,7 +187,9 @@ const Header = () => {
             </div>
             <div className="city-feature">
               <ion-icon name="logo-twitter" className="small-icon"></ion-icon>
-              <a href="#">@zblock</a>
+              <a href="#" className="landing-link landing-link-active">
+                @zblock
+              </a>
             </div>
           </div>
 
@@ -196,7 +206,9 @@ const Header = () => {
             </div>
             <div className="city-feature">
               <ion-icon name="logo-twitter" className="small-icon"></ion-icon>
-              <a href="#">@omnifood_berlin</a>
+              <a href="#" className="landing-link landing-link-active">
+                @omnifood_berlin
+              </a>
             </div>
           </div>
 
@@ -213,7 +225,9 @@ const Header = () => {
             </div>
             <div className="city-feature">
               <ion-icon name="logo-twitter" className="small-icon"></ion-icon>
-              <a href="#">@omnifood_sf</a>
+              <a href="#" className="landing-link landing-link-active">
+                @omnifood_sf
+              </a>
             </div>
           </div>
 
@@ -230,13 +244,15 @@ const Header = () => {
             </div>
             <div className="city-feature">
               <ion-icon name="logo-twitter" className="small-icon"></ion-icon>
-              <a href="#">@omnifood_london</a>
+              <a href="#" className="landing-link landing-link-active">
+                @omnifood_london
+              </a>
             </div>
           </div>
         </div>
       </section>
 
-      <section className=" section-testimonials">
+      <section className="section section-testimonials">
         <div className="row">
           <h2>Our customers can't live without us</h2>
         </div>
@@ -271,7 +287,7 @@ const Header = () => {
         </div>
       </section>
 
-      <section className=" section-plans js--section-plans" id="plans">
+      <section className="section section-plans js--section-plans" id="plans">
         <div className="row">
           <h2>Start eating healthy today</h2>
         </div>
@@ -302,7 +318,7 @@ const Header = () => {
                 </ul>
               </div>
               <div>
-                <a href="#" className="btn btn-full">
+                <a href="#" className="btn btn-full landing-link landing-link-active">
                   Sign up now
                 </a>
               </div>
@@ -335,7 +351,7 @@ const Header = () => {
                 </ul>
               </div>
               <div>
-                <a href="#" className="btn btn-ghost">
+                <a href="#" className="btn btn-ghost landing-link landing-link-active">
                   Sign up now
                 </a>
               </div>
@@ -368,7 +384,7 @@ const Header = () => {
                 </ul>
               </div>
               <div>
-                <a href="#" className="btn btn-ghost">
+                <a href="#" className="btn btn-ghost landing-link landing-link-active">
                   Sign up now
                 </a>
               </div>
@@ -377,7 +393,7 @@ const Header = () => {
         </div>
       </section>
 
-      <section className=" section-form">
+      <section className="section section-form">
         <div className="row">
           <h2>We're happy to hear from you</h2>
         </div>

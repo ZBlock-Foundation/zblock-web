@@ -32,7 +32,7 @@ BASIC SETUP
   margin: 0 auto;
 }
 
-section {
+.section {
   padding: 80px 0;
 }
 
@@ -115,8 +115,7 @@ h2:after {
 }
 
 /* ----- Hyperlinks (twitter) ----- */
-a:link,
-a:visited {
+.landing-link a:link a:visited {
   color: #e67e22;
   text-decoration: none;
   padding-bottom: 1px;
@@ -125,7 +124,7 @@ a:visited {
   transition: border-bottom 0.2s, color 0.2s;
 }
 
-a:hover,
+.landing-link-active a:hover,
 a:active {
   color: #555;
   border-bottom: 1px solid transparent;
@@ -180,7 +179,7 @@ input[type="submit"]:active {
 /* ----------------------------------------------- */
 /* HEADER */
 /* ----------------------------------------------- */
-header {
+.landing-header {
   background-image: -webkit-linear-gradient(rgba(0, 0, 0, 0.699), rgba(0, 0, 0, 0.699)), url(./hero.jpg);
   background-image: linear-gradient(rgba(0, 0, 0, 0.699), rgba(0, 0, 0, 0.699)), url(./hero.jpg);
   background-size: cover;
