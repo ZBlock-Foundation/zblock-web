@@ -22,7 +22,6 @@ a:active {
   color: #555;
   border-bottom: 1px solid transparent;
 }
-
 .p-2 {
-  padding-right: 250px !important;
+  padding-right: 150px !important;
 }

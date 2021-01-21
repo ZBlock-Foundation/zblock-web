@@ -1,23 +1,35 @@
 import React from "react";
-import { BrowserRouter, Route, Switch } from "react-router-dom";
-import AppMain from "./app/AppMain";
+import { useImmerReducer } from "use-immer";
 
+import { BrowserRouter, Route, Switch } from "react-router-dom";
+import AppDispatchContext from "../context/AppDispatchContext";
+import AppStateContext from "../context/AppStateContext";
+import { appInitialState, appReducer } from "../reducers/appReducer";
+
+// Components
+import AppMain from "./app/AppMain";
 import LandingMain from "./landing/LandingMain";
+import FlashMessages from "./utils/FlashMessages";
 
 const App = () => {
+  const [state, dispatch] = useImmerReducer(appReducer, appInitialState);
+
   return (
-    <React.Fragment>
-      <BrowserRouter>
-        <Switch>
-          <Route path="/" exact>
-            <LandingMain />
-          </Route>
-          <Route path="/app" exact>
-            <AppMain />
-          </Route>
-        </Switch>
-      </BrowserRouter>
-    </React.Fragment>
+    <AppStateContext.Provider value={state}>
+      <AppDispatchContext.Provider value={dispatch}>
+        <BrowserRouter>
+          <FlashMessages messages={state.flashMessages} />
+          <Switch>
+            <Route path="/" exact>
+              <LandingMain />
+            </Route>
+            <Route path="/app">
+              <AppMain />
+            </Route>
+          </Switch>
+        </BrowserRouter>
+      </AppDispatchContext.Provider>
+    </AppStateContext.Provider>
   );
 };
 

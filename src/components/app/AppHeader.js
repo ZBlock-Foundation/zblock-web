@@ -5,16 +5,21 @@ import { Link } from "react-router-dom";
 
 const AppHeader = () => {
   return (
-    <div class="d-flex flex-column flex-md-row align-items-center p-3 px-md-4 mb-3 bg-white border-bottom box-shadow">
-      <h5 class="my-0 mr-md-auto font-weight-normal">zblock</h5>
-      <nav class="my-2 my-md-0 mr-md-3">
-        <a class="p-2 link link-active" href="#">
-          Communities
-        </a>
+    <div className="d-flex flex-column flex-md-row align-items-center p-3 px-md-4 mb-3 bg-white border-bottom box-shadow">
+      <h5 className="my-0 mr-md-auto font-weight-normal">
+        <Link to="/app/">zblock</Link>
+      </h5>
+      <nav className="my-2 my-md-0 mr-md-3">
+        <Link className="btn btn-outline-warning" to="/app/create-community">
+          Create Community
+        </Link>
       </nav>
-      <a class="btn btn-outline-warning" href="#">
-        Connect Metamask
-      </a>
+      <nav className="my-2 my-md-0 mr-md-3">
+        <Link className="btn btn-outline-warning " to="/app/communities">
+          Communities
+        </Link>
+      </nav>
+      <button className="btn btn-outline-warning">Connect Metamask</button>
     </div>
   );
 };
