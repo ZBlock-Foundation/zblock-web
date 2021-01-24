@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from "react";
-import { Form, Input, Select, Tag, Card, Button } from "antd";
+import { Form, Input, Select, Tag, Card, Button, Row, Col } from "antd";
 import UploadImage from "./UploadFile";
 import { getAllCountries, getStatesOfCountry } from "../../api/countriesAPI";
 
@@ -103,92 +103,97 @@ const CreateCommunity = () => {
   };
 
   return (
-    <div style={{ alignItems: "center" }}>
-      <Card title="Create New Community">
-        <Form {...layout} layout="horizontal">
-          <Form.Item label="Community Name">
-            <Input placeholder="community name" />
-          </Form.Item>
+    <Row gutter={16}>
+      <Col span={24}>
+        <Card title="Create New Community">
+          <Form {...layout} layout="horizontal">
+            <Form.Item label="Community Name">
+              <Input placeholder="community name" />
+            </Form.Item>
 
-          <Form.Item label="Description">
-            <Input.TextArea placeholder="description" />
-          </Form.Item>
+            <Form.Item label="Description">
+              <Input.TextArea placeholder="description" />
+            </Form.Item>
 
-          <Form.Item label="Community Type">
-            <Select
-              showSearch
-              placeholder="select community type"
-              optionFilterProp="children"
-              onChange={(e) => console.log(e.target.value)}
-              filterOption={(input, option) =>
-                option.children.toLowerCase().indexOf(input.toLowerCase()) >= 0
-              }
-            >
-              <Select.Option value="0">Eco-Village</Select.Option>
-              <Select.Option value="1">Co-Housing</Select.Option>
-              <Select.Option value="2">Income Sharing</Select.Option>
-              <Select.Option value="3">Shared House/Flat</Select.Option>
-              <Select.Option value="4">Homestead</Select.Option>
-            </Select>
-          </Form.Item>
+            <Form.Item label="Community Type">
+              <Select
+                showSearch
+                placeholder="select community type"
+                optionFilterProp="children"
+                onChange={(e) => console.log(e.target.value)}
+                filterOption={(input, option) =>
+                  option.children.toLowerCase().indexOf(input.toLowerCase()) >=
+                  0
+                }
+              >
+                <Select.Option value="0">Eco-Village</Select.Option>
+                <Select.Option value="1">Co-Housing</Select.Option>
+                <Select.Option value="2">Income Sharing</Select.Option>
+                <Select.Option value="3">Shared House/Flat</Select.Option>
+                <Select.Option value="4">Homestead</Select.Option>
+              </Select>
+            </Form.Item>
 
-          <Form.Item label="Community Purpose">
-            <Select
-              mode="multiple"
-              showArrow
-              tagRender={communityPurposeTagsRender}
-              options={communityPurposeOptions}
-            />
-          </Form.Item>
+            <Form.Item label="Community Purpose">
+              <Select
+                mode="multiple"
+                showArrow
+                tagRender={communityPurposeTagsRender}
+                options={communityPurposeOptions}
+              />
+            </Form.Item>
 
-          <Form.Item label="Country">
-            <Select
-              showSearch
-              placeholder="select country"
-              optionFilterProp="children"
-              onSelect={(country) =>
-                country !== selectedCountry ? setSelectedCountry(country) : ""
-              }
-              filterOption={(input, option) =>
-                option.children[2].toLowerCase().indexOf(input.toLowerCase()) >=
-                0
-              }
-            >
-              {countrySelectOptions()}
-            </Select>
-          </Form.Item>
+            <Form.Item label="Country">
+              <Select
+                showSearch
+                placeholder="select country"
+                optionFilterProp="children"
+                onSelect={(country) =>
+                  country !== selectedCountry ? setSelectedCountry(country) : ""
+                }
+                filterOption={(input, option) =>
+                  option.children[2]
+                    .toLowerCase()
+                    .indexOf(input.toLowerCase()) >= 0
+                }
+              >
+                {countrySelectOptions()}
+              </Select>
+            </Form.Item>
 
-          <Form.Item label="City">
-            <Select
-              showSearch
-              placeholder="select city"
-              optionFilterProp="children"
-              value={selectedCity}
-              onSelect={(city) => setSelectedCity(city)}
-              filterOption={(input, option) =>
-                option.children.toLowerCase().indexOf(input.toLowerCase()) >= 0
-              }
-            >
-              {citySelectOptions()}
-            </Select>
-          </Form.Item>
+            <Form.Item label="City">
+              <Select
+                showSearch
+                placeholder="select city"
+                optionFilterProp="children"
+                value={selectedCity}
+                onSelect={(city) => setSelectedCity(city)}
+                filterOption={(input, option) =>
+                  option.children.toLowerCase().indexOf(input.toLowerCase()) >=
+                  0
+                }
+              >
+                {citySelectOptions()}
+              </Select>
+            </Form.Item>
 
-          <Form.Item label="Address">
-            <Input.TextArea placeholder="address detail" />
-          </Form.Item>
+            <Form.Item label="Address">
+              <Input.TextArea placeholder="address detail" />
+            </Form.Item>
 
-          <Form.Item label="Upload Image(s)">
-            <UploadImage handleImages={setImages} />
-          </Form.Item>
+            <Form.Item label="Upload Image(s)">
+              <UploadImage handleImages={setImages} />
+            </Form.Item>
 
-          <Form.Item wrapperCol={{ ...layout.wrapperCol, offset: 19 }}>
-            <Button type="primary" htmlType="submit">
-              Save
-            </Button>
-          </Form.Item>
-        </Form>
-      </Card>
-    </div>
+            <Form.Item wrapperCol={{ ...layout.wrapperCol, offset: 19 }}>
+              <Button type="primary" htmlType="submit">
+                Save
+              </Button>
+            </Form.Item>
+          </Form>
+        </Card>
+      </Col>
+    </Row>
   );
 };
 

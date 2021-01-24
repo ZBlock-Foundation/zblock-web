@@ -1,0 +1,211 @@
+{
+  "communities": [
+    {
+      "name": "Community 1",
+      "description": "My good community",
+      "communityType": "Eco-Village",
+      "communityPurpose": ["permaculture", "eco-friendly"],
+      "country": "United Kingdom",
+      "city": "London",
+      "address": "Main street",
+      "images": [
+        "https://images.unsplash.com/photo-1523741543316-beb7fc7023d8",
+        "https://images.unsplash.com/photo-1523741543316-beb7fc7023d8"
+      ],
+      "date": "2021-06-15T00:00:00.000Z",
+      "id": "1",
+      "status": "New",
+      "amount": 0.0,
+      "participants": ["p1", "p2"]
+    },
+    {
+      "name": "Community 1",
+      "description": "My good community",
+      "communityType": "Eco-Village",
+      "communityPurpose": ["permaculture", "eco-friendly"],
+      "country": "United Kingdom",
+      "city": "London",
+      "address": "Main street",
+      "images": [
+        "https://images.unsplash.com/photo-1523741543316-beb7fc7023d8",
+        "https://images.unsplash.com/photo-1523741543316-beb7fc7023d8"
+      ],
+      "date": "2021-06-15T00:00:00.000Z",
+      "id": "1",
+      "status": "New",
+      "amount": 0.0,
+      "participants": ["p1", "p2"]
+    }, {
+      "name": "Community 1",
+      "description": "My good community",
+      "communityType": "Eco-Village",
+      "communityPurpose": ["permaculture", "eco-friendly"],
+      "country": "United Kingdom",
+      "city": "London",
+      "address": "Main street",
+      "images": [
+        "https://images.unsplash.com/photo-1523741543316-beb7fc7023d8",
+        "https://images.unsplash.com/photo-1523741543316-beb7fc7023d8"
+      ],
+      "date": "2021-06-15T00:00:00.000Z",
+      "id": "1",
+      "status": "New",
+      "amount": 0.0,
+      "participants": ["p1", "p2"]
+    }, {
+      "name": "Community 1",
+      "description": "My good community",
+      "communityType": "Eco-Village",
+      "communityPurpose": ["permaculture", "eco-friendly"],
+      "country": "United Kingdom",
+      "city": "London",
+      "address": "Main street",
+      "images": [
+        "https://images.unsplash.com/photo-1523741543316-beb7fc7023d8",
+        "https://images.unsplash.com/photo-1523741543316-beb7fc7023d8"
+      ],
+      "date": "2021-06-15T00:00:00.000Z",
+      "id": "1",
+      "status": "New",
+      "amount": 0.0,
+      "participants": ["p1", "p2"]
+    }, {
+      "name": "Community 1",
+      "description": "My good community",
+      "communityType": "Eco-Village",
+      "communityPurpose": ["permaculture", "eco-friendly"],
+      "country": "United Kingdom",
+      "city": "London",
+      "address": "Main street",
+      "images": [
+        "https://images.unsplash.com/photo-1523741543316-beb7fc7023d8",
+        "https://images.unsplash.com/photo-1523741543316-beb7fc7023d8"
+      ],
+      "date": "2021-06-15T00:00:00.000Z",
+      "id": "1",
+      "status": "New",
+      "amount": 0.0,
+      "participants": ["p1", "p2"]
+    }, {
+      "name": "Community 1",
+      "description": "My good community",
+      "communityType": "Eco-Village",
+      "communityPurpose": ["permaculture", "eco-friendly"],
+      "country": "United Kingdom",
+      "city": "London",
+      "address": "Main street",
+      "images": [
+        "https://images.unsplash.com/photo-1523741543316-beb7fc7023d8",
+        "https://images.unsplash.com/photo-1523741543316-beb7fc7023d8"
+      ],
+      "date": "2021-06-15T00:00:00.000Z",
+      "id": "1",
+      "status": "New",
+      "amount": 0.0,
+      "participants": ["p1", "p2"]
+    }, {
+      "name": "Community 1",
+      "description": "My good community",
+      "communityType": "Eco-Village",
+      "communityPurpose": ["permaculture", "eco-friendly"],
+      "country": "United Kingdom",
+      "city": "London",
+      "address": "Main street",
+      "images": [
+        "https://images.unsplash.com/photo-1523741543316-beb7fc7023d8",
+        "https://images.unsplash.com/photo-1523741543316-beb7fc7023d8"
+      ],
+      "date": "2021-06-15T00:00:00.000Z",
+      "id": "1",
+      "status": "New",
+      "amount": 0.0,
+      "participants": ["p1", "p2"]
+    }, {
+      "name": "Community 1",
+      "description": "My good community",
+      "communityType": "Eco-Village",
+      "communityPurpose": ["permaculture", "eco-friendly"],
+      "country": "United Kingdom",
+      "city": "London",
+      "address": "Main street",
+      "images": [
+        "https://images.unsplash.com/photo-1523741543316-beb7fc7023d8",
+        "https://images.unsplash.com/photo-1523741543316-beb7fc7023d8"
+      ],
+      "date": "2021-06-15T00:00:00.000Z",
+      "id": "1",
+      "status": "New",
+      "amount": 0.0,
+      "participants": ["p1", "p2"]
+    }, {
+      "name": "Community 1",
+      "description": "My good community",
+      "communityType": "Eco-Village",
+      "communityPurpose": ["permaculture", "eco-friendly"],
+      "country": "United Kingdom",
+      "city": "London",
+      "address": "Main street",
+      "images": [
+        "https://images.unsplash.com/photo-1523741543316-beb7fc7023d8",
+        "https://images.unsplash.com/photo-1523741543316-beb7fc7023d8"
+      ],
+      "date": "2021-06-15T00:00:00.000Z",
+      "id": "1",
+      "status": "New",
+      "amount": 0.0,
+      "participants": ["p1", "p2"]
+    }, {
+      "name": "Community 1",
+      "description": "My good community",
+      "communityType": "Eco-Village",
+      "communityPurpose": ["permaculture", "eco-friendly"],
+      "country": "United Kingdom",
+      "city": "London",
+      "address": "Main street",
+      "images": [
+        "https://images.unsplash.com/photo-1523741543316-beb7fc7023d8",
+        "https://images.unsplash.com/photo-1523741543316-beb7fc7023d8"
+      ],
+      "date": "2021-06-15T00:00:00.000Z",
+      "id": "1",
+      "status": "New",
+      "amount": 0.0,
+      "participants": ["p1", "p2"]
+    }, {
+      "name": "Community 1",
+      "description": "My good community",
+      "communityType": "Eco-Village",
+      "communityPurpose": ["permaculture", "eco-friendly"],
+      "country": "United Kingdom",
+      "city": "London",
+      "address": "Main street",
+      "images": [
+        "https://images.unsplash.com/photo-1523741543316-beb7fc7023d8",
+        "https://images.unsplash.com/photo-1523741543316-beb7fc7023d8"
+      ],
+      "date": "2021-06-15T00:00:00.000Z",
+      "id": "1",
+      "status": "New",
+      "amount": 0.0,
+      "participants": ["p1", "p2"]
+    }, {
+      "name": "Community 1",
+      "description": "My good community",
+      "communityType": "Eco-Village",
+      "communityPurpose": ["permaculture", "eco-friendly"],
+      "country": "United Kingdom",
+      "city": "London",
+      "address": "Main street",
+      "images": [
+        "https://images.unsplash.com/photo-1523741543316-beb7fc7023d8",
+        "https://images.unsplash.com/photo-1523741543316-beb7fc7023d8"
+      ],
+      "date": "2021-06-15T00:00:00.000Z",
+      "id": "1",
+      "status": "New",
+      "amount": 0.0,
+      "participants": ["p1", "p2"]
+    }
+    
+  ]
+}
