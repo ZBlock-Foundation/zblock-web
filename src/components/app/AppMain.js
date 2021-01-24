@@ -1,6 +1,6 @@
 import React from "react";
 import { Route, Switch } from "react-router-dom";
-import MessageTypes from "../../utils/messageTypes";
+import MessageTypes from "../../utils/messageTypesUtils";
 
 // Components
 import AppFooter from "./AppFooter";

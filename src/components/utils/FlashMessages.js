@@ -1,6 +1,6 @@
 import React from "react";
 import { message } from "antd";
-import MessageTypes from "../../utils/messageTypes";
+import MessageTypes from "../../utils/messageTypesUtils";
 
 const FlashMessages = (props) => {
   const messages = props.messages.map((msg, _) => {
