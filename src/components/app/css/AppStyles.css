@@ -25,3 +25,12 @@ a:active {
 .p-2 {
   padding-right: 150px !important;
 }
+
+.site-statistic-demo-card {
+  background: #ececec;
+  padding: 30px;
+}
+
+.community-detail-card {
+  margin-bottom: 20px;
+}

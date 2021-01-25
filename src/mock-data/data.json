@@ -10,13 +10,15 @@
       "address": "Main street",
       "images": [
         "https://images.unsplash.com/photo-1523741543316-beb7fc7023d8",
-        "https://images.unsplash.com/photo-1523741543316-beb7fc7023d8"
+        "https://images.unsplash.com/photo-1495107334309-fcf20504a5ab",
+        "https://images.unsplash.com/photo-1464226184884-fa280b87c399"
       ],
       "date": "2021-06-15T00:00:00.000Z",
       "id": "1",
-      "status": "New",
       "amount": 0.0,
-      "participants": ["p1", "p2"]
+      "status": "Fund Raising",
+      "participants": [{"user": "user1", "amount": 2200}, {"user": "user2", "amount": 3000.00 }],
+      "fundGoal": 55000.00
     },
     {
       "name": "Community 1",
