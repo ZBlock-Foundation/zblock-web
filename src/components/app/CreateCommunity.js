@@ -185,10 +185,18 @@ const CreateCommunity = () => {
               <UploadImage handleImages={setImages} />
             </Form.Item>
 
-            <Form.Item wrapperCol={{ ...layout.wrapperCol, offset: 19 }}>
-              <Button type="primary" htmlType="submit">
-                Save
-              </Button>
+            <Form.Item wrapperCol={{ ...layout.wrapperCol, offset: 18 }}>
+              <div style={{ width: "100px" }}>
+                <Button
+                  block={true}
+                  type={"primary"}
+                  size={"large"}
+                  htmlType={"submit"}
+                  style={{ backgroundColor: "#e67e22", borderColor: "orange" }}
+                >
+                  Save
+                </Button>
+              </div>
             </Form.Item>
           </Form>
         </Card>
