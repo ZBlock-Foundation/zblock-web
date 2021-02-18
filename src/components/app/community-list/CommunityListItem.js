@@ -13,7 +13,7 @@ const CommunityListItem = ({ community }) => {
       cover={
         <img
           alt="example"
-          src={community.images[0]}
+          src={"https://images.unsplash.com/photo-1523741543316-beb7fc7023d8"}
           style={{ width: "400px", height: "300px" }}
         />
       }
@@ -24,6 +24,7 @@ const CommunityListItem = ({ community }) => {
       ]}
     >
       <Card.Meta title={community.name} description={community.description} />
+      {community}
     </Card>
   );
 };

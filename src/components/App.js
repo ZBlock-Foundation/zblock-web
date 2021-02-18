@@ -8,7 +8,7 @@ import { appInitialState, appReducer } from "../reducers/appReducer";
 
 // Components
 import AppMain from "./app/AppMain";
-import LandingMain from "./landing/LandingMain";
+import LandingMain from "./landing-page/LandingMain";
 import FlashMessages from "./utils/FlashMessages";
 
 const App = () => {

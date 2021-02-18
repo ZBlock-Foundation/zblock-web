@@ -1,14 +1,33 @@
-import React, { useEffect } from "react";
+import React, { useEffect, useState } from "react";
 import { Card, Col, Row } from "antd";
+import Web3 from "web3";
+import { ZBlock, address } from "../../../abi/zblock";
 
-import data from "../../mock-data/data.json";
 import CommunityListItem from "./CommunityListItem";
 
+// Defining ZBlock Smart Contract
+const web3 = new Web3(Web3.givenProvider);
+const zBlockContract = new web3.eth.Contract(ZBlock, address);
+
 const CommunityList = () => {
-  const communityList = () => {
+  const [communityList, setCommunityList] = useState([]);
+
+  useEffect(() => {
+    try {
+      const callContract = async () => {
+        const communities = await zBlockContract.methods.communityList().call();
+        setCommunityList(communities);
+      };
+      callContract();
+    } catch (e) {
+      console.log(e);
+    }
+  }, []);
+
+  const renderCommunityList = () => {
     const chunkedCommunities = Array.from(
-      { length: Math.ceil(data.communities.length / 3) },
-      (v, i) => data.communities.slice(i * 3, i * 3 + 3)
+      { length: Math.ceil(communityList.length / 3) },
+      (v, i) => communityList.slice(i * 3, i * 3 + 3)
     );
 
     const rows = chunkedCommunities.map((chunkedCommunity, index) => {
@@ -38,7 +57,7 @@ const CommunityList = () => {
           alignItems: "center",
         }}
       >
-        {communityList()}
+        {renderCommunityList()}
       </Card>
     </div>
   );

@@ -3,7 +3,7 @@ import { Upload, Modal } from "antd";
 import { PlusOutlined } from "@ant-design/icons";
 import { getBase64 } from "../../utils/fileUtils";
 
-class UploadFile extends React.Component {
+class FileUpload extends React.Component {
   state = {
     previewVisible: false,
     previewImage: "",
@@ -65,4 +65,4 @@ class UploadFile extends React.Component {
   }
 }
 
-export default UploadFile;
+export default FileUpload;

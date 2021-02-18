@@ -3,16 +3,16 @@ import { Route, Switch } from "react-router-dom";
 import MessageTypes from "../../utils/messageTypesUtils";
 
 // Components
-import AppFooter from "./AppFooter";
-import AppHeader from "./AppHeader";
-import CommunityList from "./CommunityList";
-import Home from "./Home";
-import CreateCommunity from "./CreateCommunity";
-import CommunityDetail from "./CommunityDetail";
+import AppFooter from "./home/AppFooter";
+import AppHeader from "./home/AppHeader";
+import CommunityList from "./community-list/CommunityList";
+import Home from "./home/Home";
+import CreateCommunity from "./community-create/CreateCommunity";
+import CommunityDetail from "./community-detail/CommunityDetail";
 
 // UI Components
 import "antd/dist/antd.css";
-import "./css/AppStyles.css";
+import "./styles/AppStyles.css";
 
 const AppMain = () => {
   return (

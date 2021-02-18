@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from "react";
-import LoadingSpinner from "../utils/LoadingSpinner";
+import LoadingSpinner from "../../utils/LoadingSpinner";
 import {
   Col,
   Row,
@@ -19,7 +19,7 @@ import {
   FieldTimeOutlined,
 } from "@ant-design/icons";
 
-import data from "../../mock-data/data.json";
+import data from "../../../mock-data/data.json";
 
 const CommunityDetail = () => {
   const [community, setCommunity] = useState(null);

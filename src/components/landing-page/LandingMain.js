@@ -5,7 +5,7 @@ import Footer from "./Footer";
 import Header from "./Header";
 
 // CSS
-import "./css/Styles.css";
+import "./styles/Styles.css";
 
 const LandingMain = () => {
   return (

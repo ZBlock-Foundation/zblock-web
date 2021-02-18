@@ -1,4 +1,5 @@
 import React, { useEffect, useState } from "react";
+import { withRouter } from "react-router-dom";
 import {
   Form,
   Input,
@@ -9,12 +10,18 @@ import {
   Divider,
   Row,
   Col,
-  DatePicker,
+  Slider,
+  InputNumber,
   Radio,
 } from "antd";
-import UploadImage from "./UploadFile";
-import { getAllCountries, getStatesOfCountry } from "../../api/countriesAPI";
-import { addMonth } from "../../utils/dateUtils";
+import { getAllCountries, getStatesOfCountry } from "../../../api/countriesAPI";
+import uuid from "uuid-random";
+import Web3 from "web3";
+import { ZBlock, address } from "../../../abi/zblock";
+
+// Defining ZBlock Smart Contract
+const web3 = new Web3(Web3.givenProvider);
+const zBlockContract = new web3.eth.Contract(ZBlock, address);
 
 const communityPurposeOptions = [
   { color: "gold", value: "permaculture" },
@@ -36,6 +43,16 @@ const communityPurposeColorMap = {
   political: "brown",
 };
 
+const communityPurposeValueMap = {
+  permaculture: 0,
+  vegan: 1,
+  "eco-friendly": 2,
+  religious: 3,
+  "self-sufficient": 4,
+  antispecist: 5,
+  political: 6,
+};
+
 const layout = {
   labelCol: {
     span: 4,
@@ -45,12 +62,103 @@ const layout = {
   },
 };
 
-const CreateCommunity = () => {
-  const [images, setImages] = useState([]);
+const CreateCommunity = (props) => {
+  // Community Details
+  const [name, setName] = useState(null);
+  const [description, setDescription] = useState(null);
+  const [website, setWebsite] = useState(null);
+  const [founderName, setFounderName] = useState(null);
+  const [founderEmail, setFounderEmail] = useState(null);
+  const [founderPhone, setFounderPhone] = useState(null);
+
+  // Community Type&Purpose
+  const [type, setType] = useState(0);
+  const [purposes, setPurposes] = useState([]);
+
+  // Community Location
   const [countries, setCountries] = useState([]);
   const [selectedCountry, setSelectedCountry] = useState(null);
   const [cities, setCities] = useState([]);
   const [selectedCity, setSelectedCity] = useState(null);
+  const [addressDetail, setAddressDetail] = useState(null);
+
+  // Community Fund Locking&Releasing
+  const [minLockingPeriod, setMinLockingPeriod] = useState(3);
+  const [maxLockingPeriod, setMaxLockingPeriod] = useState(3);
+  const [targetAmount, setTargetAmount] = useState(0);
+  const [releaseFund, setReleaseFund] = useState(0);
+  const [securityManager, setSecurityManager] = useState(null);
+  const [securityManagers, setSecurityManagers] = useState([
+    "0xdD5625F35B98D94Aa1A38dc170A2d06283A81830",
+    "0xD92F1DE3a33db86Df6b3834A742116BACE66830F",
+    "0xf9FA39ea483AC14cC4A83127B067EFF719c8898F",
+  ]);
+
+  // handle form submit
+  const handleFormSubmit = async (values) => {
+    // Community Detail
+    const communityDetail = {
+      id: uuid(),
+      name: name,
+      description: description,
+      website: website,
+      founderName: founderName,
+      founderEmail: founderEmail,
+      founderPhone: founderPhone,
+    };
+
+    // Community Type&Purpose
+    const communityType = type;
+    const communityPurposes = purposes.map((v) => communityPurposeValueMap[v]);
+
+    // Community Address
+    const communityAddress = {
+      country: selectedCountry,
+      city: selectedCity,
+      addressDetail: addressDetail,
+    };
+
+    // Commuinity Fund Locking&Releasing
+    const communityFundLocking = {
+      minLockingDate: minLockingPeriod,
+      maxLockingDate: maxLockingPeriod,
+    };
+
+    const communityFundReleasing = {
+      targetAmount: targetAmount,
+      releaseFund: releaseFund,
+      securityManager: securityManager,
+    };
+
+    const accounts = await window.ethereum.enable();
+    const account = accounts[0];
+
+    const communityInfo = {
+      founder: account,
+      detail: communityDetail,
+      typeInfo: communityType,
+      purposes: communityPurposes,
+      addressInfo: communityAddress,
+      fundLocking: communityFundLocking,
+      fundReleasing: communityFundReleasing,
+    };
+
+    try {
+      const gas = await zBlockContract.methods
+        .newCommunity(communityInfo)
+        .estimateGas();
+
+      const response = await zBlockContract.methods
+        .newCommunity(communityInfo)
+        .send({ from: account, gas });
+      props.history.push("/app/communities");
+    } catch (e) {
+      console.log(e);
+    }
+  };
+
+  // Steps
+  const [stepIndex, setStepIndex] = useState(0);
 
   useEffect(() => {
     try {
@@ -76,10 +184,6 @@ const CreateCommunity = () => {
     };
     setCityList();
   }, [selectedCountry]);
-
-  useEffect(() => {
-    console.log(images);
-  }, [images]);
 
   const communityPurposeTagsRender = (props) => {
     const { label, value, closable, onClose } = props;
@@ -115,9 +219,6 @@ const CreateCommunity = () => {
     });
   };
 
-  // Steps
-  const [stepIndex, setStepIndex] = useState(0);
-
   return (
     <React.Fragment>
       <h4 style={{ marginLeft: 10 }}>Create New Community</h4>
@@ -128,13 +229,10 @@ const CreateCommunity = () => {
         <Col span={20}>
           <Steps current={stepIndex}>
             <Steps.Step key={0} title={"Details"} />
-            <Steps.Step key={1} title={"Type"} />
-            <Steps.Step key={2} title={"Purpose"} />
-            <Steps.Step key={3} title={"Location"} />
-            <Steps.Step key={4} title={"Images"} />
-            <Steps.Step key={5} title={"Fund Locking"} />
-            <Steps.Step key={6} title={"Fund Releasing"} />
-            <Steps.Step key={7} title={"Done"} />
+            <Steps.Step key={1} title={"Type & Purpose"} />
+            <Steps.Step key={2} title={"Location"} />
+            <Steps.Step key={3} title={"Fund Locking & Releasing"} />
+            <Steps.Step key={4} title={"Overview"} />
           </Steps>
         </Col>
         <Col span={2}></Col>
@@ -142,13 +240,17 @@ const CreateCommunity = () => {
 
       <Row gutter={16}>
         <Col span={24} style={{ marginTop: 20 }}>
-          <Form {...layout} layout="horizontal">
+          <Form {...layout} layout="horizontal" onFinish={handleFormSubmit}>
             {stepIndex === 0 && (
               <div style={{ marginTop: 20 }}>
                 <Row>
                   <Col span={12}>
                     <Form.Item label="Name" required={true}>
-                      <Input placeholder="Community Name" />
+                      <Input
+                        placeholder="Community Name"
+                        value={name}
+                        onChange={(e) => setName(e.target.value)}
+                      />
                     </Form.Item>
 
                     <Form.Item label="Description" required={true}>
@@ -157,28 +259,46 @@ const CreateCommunity = () => {
                         rows={10}
                         minLength={10}
                         maxLength={500}
+                        value={description}
+                        onChange={(e) => setDescription(e.target.value)}
                       />
                     </Form.Item>
 
                     <Form.Item label="Website">
-                      <Input placeholder="Community Website(if available)" />
+                      <Input
+                        placeholder="Community Website(if available)"
+                        value={website}
+                        onChange={(e) => setWebsite(e.target.value)}
+                      />
                     </Form.Item>
                   </Col>
                   <Col span={12}>
                     <Form.Item label="Founder Name" required={true}>
-                      <Input placeholder="Community's Founder Name" />
-                    </Form.Item>
-
-                    <Form.Item label="Founder Email" required={true}>
-                      <Input placeholder="Community's Founder Email" />
+                      <Input
+                        placeholder="Community's Founder Name"
+                        value={founderName}
+                        onChange={(e) => setFounderName(e.target.value)}
+                      />
                     </Form.Item>
 
                     <Form.Item
-                      label="Founder Phone"
+                      label="Founder Email"
                       required={true}
                       rules={[{ type: "email" }]}
                     >
-                      <Input placeholder="Community's Founder Phone Number" />
+                      <Input
+                        placeholder="Community's Founder Email"
+                        value={founderEmail}
+                        onChange={(e) => setFounderEmail(e.target.value)}
+                      />
+                    </Form.Item>
+
+                    <Form.Item label="Founder Phone" required={true}>
+                      <Input
+                        placeholder="Community's Founder Phone Number"
+                        value={founderPhone}
+                        onChange={(e) => setFounderPhone(e.target.value)}
+                      />
                     </Form.Item>
                   </Col>
                 </Row>
@@ -193,26 +313,22 @@ const CreateCommunity = () => {
                       showSearch
                       placeholder="Select Community Type"
                       optionFilterProp="children"
-                      onChange={(e) => console.log(e.target.value)}
                       filterOption={(input, option) =>
                         option.children
                           .toLowerCase()
                           .indexOf(input.toLowerCase()) >= 0
                       }
+                      onChange={(value) => setType(value)}
                     >
                       <Select.Option value="0">Eco-Village</Select.Option>
                       <Select.Option value="1">Co-Housing</Select.Option>
                       <Select.Option value="2">Income Sharing</Select.Option>
-                      <Select.Option value="3">Shared House/Flat</Select.Option>
-                      <Select.Option value="4">Homestead</Select.Option>
+                      <Select.Option value="3">Shared House</Select.Option>
+                      <Select.Option value="4">Shared Flat</Select.Option>
+                      <Select.Option value="5">Homestead</Select.Option>
                     </Select>
                   </Form.Item>
                 </Col>
-              </div>
-            )}
-
-            {stepIndex === 2 && (
-              <div style={{ marginLeft: "20%" }}>
                 <Col span={18}>
                   <Form.Item label="Community Purpose" required={true}>
                     <Select
@@ -221,13 +337,16 @@ const CreateCommunity = () => {
                       placeholder={"Select Community Purpose Tags"}
                       tagRender={communityPurposeTagsRender}
                       options={communityPurposeOptions}
+                      onChange={(value) => {
+                        setPurposes(value);
+                      }}
                     />
                   </Form.Item>
                 </Col>
               </div>
             )}
 
-            {stepIndex === 3 && (
+            {stepIndex === 2 && (
               <div style={{ marginLeft: "20%" }}>
                 <Col span={18}>
                   <Form.Item label="Country" required={true}>
@@ -266,61 +385,75 @@ const CreateCommunity = () => {
                     </Select>
                   </Form.Item>
                   <Form.Item label="Address" required={true}>
-                    <Input.TextArea placeholder="Address Detail" />
-                  </Form.Item>
-                </Col>
-              </div>
-            )}
-
-            {stepIndex === 4 && (
-              <div style={{ marginLeft: "30%", marginTop: 50 }}>
-                <Col span={20}>
-                  <Form.Item label="Community Image(s)">
-                    <UploadImage handleImages={setImages} />
-                  </Form.Item>
-                </Col>
-              </div>
-            )}
-
-            {stepIndex === 5 && (
-              <div style={{ marginLeft: "30%", marginTop: 50 }}>
-                <Col span={20}>
-                  <Form.Item label="Min. Locking Period" required={true}>
-                    <DatePicker
-                      style={{ width: 200 }}
-                      disabledDate={(date) =>
-                        date && date < addMonth(3).endOf("day")
-                      }
-                    />
-                  </Form.Item>
-                  <Form.Item label="Max. Locking Period" required={true}>
-                    <DatePicker
-                      style={{ width: 200 }}
-                      disabledDate={(date) =>
-                        date && date < addMonth(3).endOf("day")
-                      }
+                    <Input.TextArea
+                      placeholder="Address Detail"
+                      value={addressDetail}
+                      onChange={(e) => setAddressDetail(e.target.value)}
                     />
                   </Form.Item>
                 </Col>
               </div>
             )}
 
-            {stepIndex === 6 && (
-              <div style={{ marginLeft: "20%", marginTop: 20 }}>
-                <Col span={20}>
+            {stepIndex === 3 && (
+              <div style={{ marginLeft: "30%", marginTop: 50 }}>
+                <Col span={22}>
+                  <Form.Item
+                    label="Min. Locking Period(Months)"
+                    required={true}
+                  >
+                    <Slider
+                      min={3}
+                      max={120}
+                      value={minLockingPeriod}
+                      onChange={(value) => setMinLockingPeriod(value)}
+                    />
+                    <InputNumber
+                      min={3}
+                      max={120}
+                      style={{ margin: "0 16px" }}
+                      value={minLockingPeriod}
+                      onChange={(value) => setMinLockingPeriod(value)}
+                    />
+                  </Form.Item>
+                  <Form.Item
+                    label="Max. Locking Period(Months)"
+                    required={true}
+                  >
+                    <Slider
+                      min={minLockingPeriod}
+                      max={120}
+                      value={maxLockingPeriod}
+                      onChange={(value) => setMaxLockingPeriod(value)}
+                    />
+                    <InputNumber
+                      min={minLockingPeriod}
+                      max={120}
+                      style={{ margin: "0 16px" }}
+                      value={maxLockingPeriod}
+                      onChange={(value) => setMaxLockingPeriod(value)}
+                    />
+                  </Form.Item>
+                </Col>
+                <Col span={22}>
                   <Form.Item label={"Target Amount"} required={true}>
                     <Input
                       placeholder="Amount"
                       type="number"
                       style={{ width: 350 }}
+                      value={targetAmount}
+                      onChange={(e) => setTargetAmount(e.target.value)}
                     />
                   </Form.Item>
 
                   <Form.Item label="Release Fund" required={true}>
-                    <Radio.Group defaultValue="100">
-                      <Radio.Button value="100">100% of Target</Radio.Button>
-                      <Radio.Button value="75">75% of Target</Radio.Button>
-                      <Radio.Button value="50">50% of Target</Radio.Button>
+                    <Radio.Group
+                      defaultValue={0}
+                      onChange={(e) => setReleaseFund(e.target.value)}
+                    >
+                      <Radio.Button value={0}>100% of Target</Radio.Button>
+                      <Radio.Button value={1}>75% of Target</Radio.Button>
+                      <Radio.Button value={2}>50% of Target</Radio.Button>
                     </Radio.Group>
                   </Form.Item>
 
@@ -330,23 +463,27 @@ const CreateCommunity = () => {
                       showSearch
                       placeholder="Select Security Manager"
                       optionFilterProp="children"
-                      onChange={(e) => console.log(e.target.value)}
+                      onChange={(value) => setSecurityManager(value)}
                       filterOption={(input, option) =>
                         option.children
                           .toLowerCase()
                           .indexOf(input.toLowerCase()) >= 0
                       }
                     >
-                      <Select.Option value="0">Security Manager1</Select.Option>
-                      <Select.Option value="1">Security Manager2</Select.Option>
-                      <Select.Option value="2">Security Manager3</Select.Option>
+                      {securityManagers.map((securityManager, index) => {
+                        return (
+                          <Select.Option key={index} value={securityManager}>
+                            {securityManager}
+                          </Select.Option>
+                        );
+                      })}
                     </Select>
                   </Form.Item>
                 </Col>
               </div>
             )}
 
-            {stepIndex === 7 && (
+            {stepIndex === 4 && (
               <div
                 style={{
                   marginLeft: "30%",
@@ -369,15 +506,6 @@ const CreateCommunity = () => {
                 float: "right",
               }}
             >
-              {stepIndex < 7 && (
-                <Button
-                  type="primary"
-                  onClick={() => setStepIndex(stepIndex + 1)}
-                >
-                  Next
-                </Button>
-              )}
-
               {stepIndex > 0 && (
                 <Button
                   style={{ margin: "0 8px" }}
@@ -387,7 +515,16 @@ const CreateCommunity = () => {
                 </Button>
               )}
 
-              {stepIndex === 7 && (
+              {stepIndex < 4 && (
+                <Button
+                  type="primary"
+                  onClick={() => setStepIndex(stepIndex + 1)}
+                >
+                  Next
+                </Button>
+              )}
+
+              {stepIndex === 4 && (
                 <Button
                   type={"primary"}
                   htmlType={"submit"}
@@ -407,4 +544,4 @@ const CreateCommunity = () => {
   );
 };
 
-export default CreateCommunity;
+export default withRouter(CreateCommunity);
